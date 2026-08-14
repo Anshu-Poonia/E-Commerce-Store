@@ -72,7 +72,7 @@ export const createCheckoutSession = async (req, res) => {
     if (totalAmount >= 20000) {
       await createNewCoupon(req.user._id);
     }
-    res.status(200).json({ id: session.id, totalAmount: totalAmount / 100 });
+    res.status(200).json({ id: session.id, url: session.url, totalAmount: totalAmount / 100 });
   } catch (error) {
     console.error("Error processing checkout:", error);
     res
@@ -123,12 +123,10 @@ export const checkoutSuccess = async (req, res) => {
     }
   } catch (error) {
     console.error("Error processing successful checkout:", error);
-    res
-      .status(500)
-      .json({
-        message: "Error processing successful checkout",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error processing successful checkout",
+      error: error.message,
+    });
   }
 };
 
