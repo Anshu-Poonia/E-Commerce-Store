@@ -4,27 +4,26 @@ import { useCartStore } from "../stores/useCartStore";
 
 const GiftCouponCard = () => {
   const [userInputCode, setUserInputCode] = useState("");
-  const { coupon, isCouponApplied} = useCartStore();
-//   const { coupon, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } =
-//     useCartStore();
+  const { coupon, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } =
+    useCartStore();
 
-//   useEffect(() => {
-//     getMyCoupon();
-//   }, [getMyCoupon]);
+  useEffect(() => {
+    getMyCoupon();
+  }, [getMyCoupon]);
 
-//   useEffect(() => {
-//     if (coupon) setUserInputCode(coupon.code);
-//   }, [coupon]);
+  useEffect(() => {
+    if (coupon) setUserInputCode(coupon.code);
+  }, [coupon]);
 
-//   const handleApplyCoupon = () => {
-//     if (!userInputCode) return;
-//     applyCoupon(userInputCode);
-//   };
+  const handleApplyCoupon = () => {
+    if (!userInputCode) return;
+    applyCoupon(userInputCode);
+  };
 
-//   const handleRemoveCoupon = async () => {
-//     await removeCoupon();
-//     setUserInputCode("");
-//   };
+  const handleRemoveCoupon = async () => {
+    await removeCoupon();
+    setUserInputCode("");
+  };
 
   return (
     <motion.div
@@ -49,7 +48,7 @@ const GiftCouponCard = () => {
             focus:ring-emerald-500"
             placeholder="Enter code here"
             value={userInputCode}
-            // onChange={(e) => setUserInputCode(e.target.value)}
+            onChange={(e) => setUserInputCode(e.target.value)}
             required
           />
         </div>
@@ -59,7 +58,7 @@ const GiftCouponCard = () => {
           className="flex w-full items-center justify-center rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-        //   onClick={handleApplyCoupon}
+          onClick={handleApplyCoupon}
         >
           Apply Code
         </motion.button>
@@ -79,7 +78,7 @@ const GiftCouponCard = () => {
              focus:ring-4 focus:ring-red-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            // onClick={handleRemoveCoupon}
+            onClick={handleRemoveCoupon}
           >
             Remove Coupon
           </motion.button>

@@ -5,11 +5,23 @@ export const getCoupon = async (req, res) => {
     const coupon = await Coupon.findOne({
       userId: req.user._id,
       isActive: true,
+      expirationDate: { $gt: new Date() },
     });
-    res.json(coupon || null);
+
+    if (!coupon) {
+      return res.status(404).json({
+        message: "No active coupon found",
+      });
+    }
+
+    return res.status(200).json(coupon);
   } catch (error) {
-    console.log("Error in getCoupon controller", error.message);
-    res.status(500).json({ message: "Server error", error: error.message });
+    console.error("Error fetching coupon:", error);
+
+    return res.status(500).json({
+      message: "Error fetching coupon",
+      error: error.message,
+    });
   }
 };
 
